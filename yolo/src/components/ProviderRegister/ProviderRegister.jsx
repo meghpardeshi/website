@@ -77,12 +77,14 @@ const ColorlibConnector = withStyles({
       backgroundColor: '#fff',
       zIndex: 1,
       color: '#0099cc',
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       display: 'flex',
       borderRadius: '50%',
       justifyContent: 'center',
       alignItems: 'center',
+      marginTop:'-5px'
+ 
     },
     active: {
       backgroundImage:
@@ -104,10 +106,10 @@ function ColorlibStepIcon(props) {
     const { active, completed } = props;
   
     const icons = {
-      1: <PersonIcon />,
-      2: <GroupAddIcon />,
-      3: <VideoLabelIcon />,
-      4: <WorkIcon/>,
+      1: <PersonIcon style={{width: '15px', height:'15px'}}/>,
+      2: <GroupAddIcon style={{width: '15px', height:'15px'}}/>,
+      3: <VideoLabelIcon style={{width: '15px', height:'15px'}}/>,
+      4: <WorkIcon style={{width: '15px', height:'15px'}}/>,
     };
   
     return (
@@ -138,12 +140,8 @@ const nodes = [{
 
 
 var stepper_style={
-    backgroundImage:'linear-gradient( 136deg, rgb(140, 179, 217) 0%, rgb(121, 166, 210) 50%, rgb(83, 140, 198) 100%)',
+    backgroundImage:'linear-gradient( 136deg, rgb(0, 191, 255) 0%, rgb(0, 179, 179) 50%, rgb(0, 230, 230) 100%)',
     color: '#fff'
-}
-
-var input_style={
-    
 }
 
 
@@ -625,10 +623,7 @@ treeParse = (nodes, checkedArray) => {
         if(this.state.activeStep === 3) {
             return(
                 <div class="form_container">
-                    <div class="form_header">
-                        <Typography variant="h6">Please provide your Service details</Typography>
-                    </div>
-                    <br/>
+         
 
                     <div style={{height: "10px",display: "block"}}></div>
 
@@ -690,11 +685,8 @@ treeParse = (nodes, checkedArray) => {
         if (this.state.activeStep === 2) {
             return (
                 <div class="form_container">
-                    <div class="form_header" style={{textAlign: 'center'}}>
-                        <Typography variant="h6">Please provide your Organisation services</Typography>
-                    </div>
-                    <br/>
-
+                    
+            
                     <div className={this.classes.root}>
                         <Tabs
                             value={this.state.value}
@@ -799,10 +791,7 @@ treeParse = (nodes, checkedArray) => {
         if (this.state.activeStep === 0) {
             return (
                 <div class="form_container">
-                    <div class="form_header">
-                        <Typography variant="h6">Please provide your personal details</Typography>
-                    </div>
-                    <br/>
+                    
 
                     <Container maxWidth="sm" style={{ marginBottom: 30 }}>
                         <form noValidate autoCapitalize="off">
@@ -824,10 +813,10 @@ treeParse = (nodes, checkedArray) => {
                                 value={this.state.firstName}
                                 variant="outlined"
           
-                                inputProps={{style: {fontSize: 40}}}
-                                InputLabelProps={{style: {fontSize: 40}}} 
-                                
+                                inputProps={{style: {fontSize: 12}}}
+
                                 InputProps={{
+                                    
                                     endAdornment:
                                     <InputAdornment position="end">
                                       <PermIdentityIcon style={{color: '#006699'}}/>
@@ -850,6 +839,9 @@ treeParse = (nodes, checkedArray) => {
                                 onChange={(e) => this.change(e)}
                                 value={this.state.lastName}
                                 variant="outlined"
+
+                                inputProps={{style: {fontSize: 12}}}
+
                                 InputProps={{
                                     endAdornment:
                                     <InputAdornment position="end">
@@ -876,6 +868,9 @@ treeParse = (nodes, checkedArray) => {
                                 onChange={(e) => this.change(e)}
                                 value={this.state.email}
                                 variant="outlined"
+
+                                inputProps={{style: {fontSize: 12}}}
+
                                 InputProps={{
                                     endAdornment:
                                     <InputAdornment position="end">
@@ -905,7 +900,7 @@ treeParse = (nodes, checkedArray) => {
                                 value={this.state.password}
                                 variant="outlined"
                                 
-                                      
+                                inputProps={{style: {fontSize: 12}}}      
                             />
 
                                 </GridItem>
@@ -925,6 +920,8 @@ treeParse = (nodes, checkedArray) => {
                                 onChange={(e) => this.change(e)}
                                 value={this.state.confirmPassword}
                                 variant="outlined"
+
+                                inputProps={{style: {fontSize: 12}}}
                             />
                                 </GridItem>
 
@@ -1006,10 +1003,7 @@ treeParse = (nodes, checkedArray) => {
         if (this.state.activeStep === 1) {
             return (
                 <div class="form_container">
-                    <div class="form_header">
-                        <Typography variant="h6">Please provide your organization details</Typography>
-                    </div>
-                    <br/>
+  
 
                     <Container maxWidth="sm" style={{ marginBottom: 50 }}>
                         <form noValidate autoCapitalize="off">
@@ -1031,6 +1025,7 @@ treeParse = (nodes, checkedArray) => {
                                 variant="outlined"
                                 onChange={(e) => this.change(e)}
                                 value={this.state.OrgName}
+                                inputProps={{style: {fontSize: 12}}}
                             />
                                 </GridItem>
                                 </GridContainer>
@@ -1053,6 +1048,7 @@ treeParse = (nodes, checkedArray) => {
                                 helperText={this.state.errors.OrgAddress}
                                 onChange={(e) => this.change(e)}
                                 value={this.state.OrgAddress}
+                                inputProps={{style: {fontSize: 12}}}
                             />
                                 </GridItem>
                             </GridContainer>
@@ -1073,6 +1069,7 @@ treeParse = (nodes, checkedArray) => {
                                 name="Fees"
                                 onChange={(e) => this.change(e)}
                                 value={this.state.Fees}
+                                inputProps={{style: {fontSize: 12}}}
                             />
                                </GridItem>
                                <GridItem xs={12} sm={12} md={6}>
@@ -1089,6 +1086,7 @@ treeParse = (nodes, checkedArray) => {
                                 variant="outlined"
                                 onChange={(e) => this.change(e)}
                                 value={this.state.PinCode}
+                                inputProps={{style: {fontSize: 12}}}
                             /> 
                                </GridItem>
                            </GridContainer>
@@ -1149,6 +1147,7 @@ treeParse = (nodes, checkedArray) => {
                                 name="ALine1"
                                 onChange={(e) => this.change(e)}
                                 value={this.state.ALine1}
+                                inputProps={{style: {fontSize: 12}}}
                             /> 
                                 </GridItem>
                             </GridContainer>
@@ -1168,6 +1167,7 @@ treeParse = (nodes, checkedArray) => {
                                 name="ALine2"
                                 onChange={(e) => this.change(e)}
                                 value={this.state.ALine2}
+                                inputProps={{style: {fontSize: 12}}}
                             /> 
                                 </GridItem>
                             </GridContainer>
@@ -1189,6 +1189,7 @@ treeParse = (nodes, checkedArray) => {
                                 helperText={this.state.errors.OrgRegNumber}
                                 onChange={(e) => this.change(e)}
                                 value={this.state.OrgRegNumber}
+                                inputProps={{style: {fontSize: 12}}}
                             />
                                 </GridItem>
                             </GridContainer>
@@ -1210,6 +1211,7 @@ treeParse = (nodes, checkedArray) => {
                                 onChange={(e) => this.change(e)}
                                 style={{ marginBottom: 40 }}
                                 value={this.state.OrgPINType}
+                                inputProps={{style: {fontSize: 12}}}
                             />
                                 </GridItem>
                             </GridContainer>
