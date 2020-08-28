@@ -1,32 +1,28 @@
 /**
- * @fileoverview Action for user updates
+ * @fileoverview Action for city updates
  */
 
-import { 
-    USER_UPDATE_IS_ERROR, 
-    USER_UPDATE_IS_LOADING, 
-    USER_UPDATE_IS_SUCCESS 
-} from '../types/user';
+import {
+    UPDATE_CITY_LOADING_TOGGLE,
+    UPDATE_CITY_NETWORK_ACCESS_SUCCESS,
+    UPDATE_CITY_NETWORK_ACCESS_FAILURE
+} from '../types/utils';
 
-export function userUpdate(email, name, phone_number, country, photo) {
-    return(dispatch) => {
+export function cityUpdate(city,name) {
+    return (dispatch) => {
         dispatch(loading(true));
-        return fetch('/api/user/update', {
+        return fetch('/api/common/city', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': window.localStorage.getItem('token')
             },
             body: JSON.stringify({
-                email: email,
-                name: name,
-                phone_number: phone_number,
-                //country: country,
-                //photo: photo
+                city: city,
+                name: name
             })
-        }).then(res=> {
-            if(res.status === 200) {
-                return res.json().then(res=>{
+        }).then(res => {
+            if (res.status === 200) {
+                return res.json().then(res => {
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
@@ -35,11 +31,11 @@ export function userUpdate(email, name, phone_number, country, photo) {
                 dispatch(isError(res.statusText));
             } else {
                 dispatch(loading(false));
-                return res.json().then(res=> {
+                return res.json().then(res => {
                     dispatch(isError(res));
                 })
             }
-        }).catch(err=> {
+        }).catch(err => {
             dispatch(loading(false));
             dispatch(isError(err));
         })
@@ -48,21 +44,21 @@ export function userUpdate(email, name, phone_number, country, photo) {
 
 export function loading(loading) {
     return {
-        type: USER_UPDATE_IS_LOADING,
+        type: UPDATE_CITY_LOADING_TOGGLE,
         payload: loading
     }
 }
 
 export function isSuccess(success) {
     return {
-        type: USER_UPDATE_IS_SUCCESS,
+        type: UPDATE_CITY_NETWORK_ACCESS_SUCCESS,
         payload: success
     }
 }
 
 export function isError(err) {
     return {
-        type: USER_UPDATE_IS_ERROR,
+        type: UPDATE_CITY_NETWORK_ACCESS_FAILURE,
         payload: err
     }
 }
