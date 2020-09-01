@@ -84,7 +84,6 @@ export default class ProviderLogin extends React.Component {
     login = (e) => {
         e.preventDefault();
         this.props.providerLogin(this.state.email, this.state.password);
-        console.log(store)
         store.subscribe(()=> {
             if(store.getState().providerLogin.error) {
                 this.setState({
@@ -95,15 +94,13 @@ export default class ProviderLogin extends React.Component {
                 })
             } else {
                 console.log("provider profile",store.getState().providerLogin.success.partnerData)
-                window.localStorage.setItem('token', store.getState().providerLogin.success.token);
+               // window.localStorage.setItem('token', store.getState().providerLogin.success.token);
                 //setName(store.getState().providerLogin.success[0].name);
-                window.localStorage.setItem('providerProfile', true);
+               // window.localStorage.setItem('providerProfile', true);
                 //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
-                window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
+               // window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
                 //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
-                console.log(JSON.stringify(store.getState().providerLogin.success.partnerData));
-                window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
-                console.log(localStorage.getItem('providerData'));
+                //window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
 
                 history.push('/provider/dashboard');
             }

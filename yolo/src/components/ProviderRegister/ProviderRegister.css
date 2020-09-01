@@ -1,6 +1,32 @@
+.box_shadow{box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); border-radius: 2px;}
+.border{border: 0.5px solid rgba(242, 242, 242,0.5);}
+
+.full_data_container{width: 70%; margin-left: 15%; padding: 0px 0px 30px 0px; margin-top: 100px;margin-bottom: 50px;}
+@media only screen and (max-width: 750px) {.full_data_container{width: 90%; margin-left: 5%;}}
+
+.form_container{width: 200%; margin-left: -50%; padding: 30px 0px 30px 0px;  margin-top: -50px; margin-bottom: 50px;}
+@media only screen and (max-width: 750px) {.form_container{width: 130%; margin-left: -20%;  margin-top: 0px;}}
+
+
+
+
+.form_header{width: 90%; margin-left: 5%;  text-align: left;}
+
+.dropDown{
+    width: 400px;
+}
+@media only screen and (max-width: 768px) {
+    .dropDown{
+        width: 300px;
+    }
+  }
+
+
+
+
 .root {
     padding-top: 220px !important;
-    max-width: 70% !important;
+    max-width: 90% !important;
     width: 300px !important;
 }
 
@@ -47,14 +73,6 @@
     margin-left: 0px;
 }
 
-.dropDown{
-    width: 600px;
-}
-@media only screen and (max-width: 768px) {
-    .dropDown{
-        width: 300px;
-    }
-  }
 
 
 /* .root {

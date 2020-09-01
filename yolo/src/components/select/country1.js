@@ -24,6 +24,8 @@ class Country extends React.Component {
       filterValueField: "",
       searchByName: false,
       searchByOrg: false,
+      orgNames: [],
+      names: [],
       country: [],
       city: []
     }
@@ -33,19 +35,58 @@ class Country extends React.Component {
     this.setState({
       allProvider: this.props.getAllProvider,
       allServices: this.props.getAllService,
-      allExpertise: this.props.getAllExpertise
+      allExpertise: this.props.getAllExpertise,
+      country: this.props.getAllCountries
     })
-    let countryArr = Object.keys(city)
-    this.setState({ country: countryArr })
+
+    setTimeout(() => {
+      let orgNameUnique = []
+      let nameUnique = []
+      for (let obj of this.props.getAllProvider) {
+        orgNameUnique.push(obj.OrganizationName)
+        nameUnique.push(obj.fullName)
+      }
+      orgNameUnique = orgNameUnique.filter(function (item, pos) {
+        return orgNameUnique.indexOf(item) == pos;
+      });
+      nameUnique = nameUnique.filter(function (item, pos) {
+        return nameUnique.indexOf(item) == pos;
+      });
+      this.setState({
+        names: nameUnique,
+        orgNames: orgNameUnique
+      })
+    }, 750);
+
+  }
+
+  citySelect = () => {
+    var cityValue = []
+    var finalCity = []
+    this.props.getAllCountries.map((item) => {
+      if (item.name === this.state.filterValue.country) {
+        cityValue = item.cities
+        for (let city of cityValue) {
+          if (city.substr(0, 6) == "Others") {
+            finalCity.push(city.substr(7))
+          }
+          else {
+            finalCity.push(city)
+          }
+        }
+        finalCity = finalCity.sort()
+        this.setState({ city: finalCity })
+      }
+    })
   }
 
   filterData = (e) => {
     const { filterValue } = this.state
     if (e.target.id.substring(0, 2) == "co") {
-      let country = e.target.innerHTML
-      let cityArr = city[country]
-      this.setState({ city: cityArr })
       this.setState({ filterValue: { ...filterValue, ["country"]: e.target.innerHTML } });
+      setTimeout(() => {
+        this.citySelect()
+      }, 500);
     }
     else if (e.target.id.substring(0, 2) == "ci") {
       this.setState({ filterValue: { ...filterValue, ["city"]: e.target.innerHTML } });
@@ -63,10 +104,10 @@ class Country extends React.Component {
       this.setState({ searchBox: this.props.getAllExpertise, searchByName: false, searchByOrg: false, filterValueField: "expertise" })
     }
     else if (e.target.innerHTML == "Name") {
-      this.setState({ searchBox: this.props.getAllProvider, searchByName: true, searchByOrg: false, filterValueField: "name" })
+      this.setState({ searchBox: this.state.names, searchByName: true, searchByOrg: false, filterValueField: "name" })
     }
     else if (e.target.innerHTML == "Organization Name") {
-      this.setState({ searchBox: this.props.getAllProvider, searchByOrg: true, searchByName: false, filterValueField: "orgName" })
+      this.setState({ searchBox: this.state.orgNames, searchByOrg: true, searchByName: false, filterValueField: "orgName" })
     }
   }
 
@@ -81,76 +122,76 @@ class Country extends React.Component {
         <div className="d-flex justify-content-between">
           {/* <GridContainer> */}
 
-            <div>
-              <GridItem xs={6} sm={6} md={2}>
-                <Autocomplete
-                  onChange={this.filterData}
-                  style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
-                  id="country"
-                  options={this.state.country}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) =>
-                    <TextField {...params} placeholder="Select Country" variant="outlined" />
-                  }
-                />
-              </GridItem>
-            </div>
+          <div>
+            <GridItem xs={6} sm={6} md={2}>
+              <Autocomplete
+                onChange={this.filterData}
+                style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
+                id="country"
+                options={this.props.getAllCountries}
+                getOptionLabel={(option) => option.name}
+                renderInput={(params) =>
+                  <TextField {...params} placeholder="Select Country" variant="outlined" />
+                }
+              />
+            </GridItem>
+          </div>
 
-            <div>
-              <GridItem xs={6} sm={6} md={2}>
-                <Autocomplete
-                  onChange={this.filterData}
-                  style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
-                  id="city"
-                  options={this.state.city}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) =>
-                    <TextField {...params} placeholder="Select City" variant="outlined" />
-                  }
-                />
-              </GridItem>
-            </div>
+          <div>
+            <GridItem xs={6} sm={6} md={2}>
+              <Autocomplete
+                onChange={this.filterData}
+                style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
+                id="city"
+                options={this.state.city}
+                getOptionLabel={(option) => option}
+                renderInput={(params) =>
+                  <TextField {...params} placeholder="Select City" variant="outlined" />
+                }
+              />
+            </GridItem>
+          </div>
 
-            <div>
-              <GridItem xs={6} sm={6} md={2}>
-                <Autocomplete
-                  onChange={this.searchByFilter}
-                  style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
-                  id="searchBy"
-                  options={searchByValue}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) =>
-                    <TextField {...params} placeholder="Search By" variant="outlined" />
-                  }
-                />
-              </GridItem>
-            </div>
+          <div>
+            <GridItem xs={6} sm={6} md={2}>
+              <Autocomplete
+                onChange={this.searchByFilter}
+                style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
+                id="searchBy"
+                options={searchByValue}
+                getOptionLabel={(option) => option}
+                renderInput={(params) =>
+                  <TextField {...params} placeholder="Search By" variant="outlined" />
+                }
+              />
+            </GridItem>
+          </div>
 
-            <div>
-              <GridItem xs={12} sm={12} md={6}>
-                <Autocomplete
-                  onChange={this.filterData}
-                  style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
-                  id="SearchByField"
-                  options={this.state.searchBox}
-                  getOptionLabel={(option) => this.state.searchByOrg ? option.OrganizationName : (this.state.searchByName ? option.fullName : option.name)}
-                  renderInput={(params) =>
-                    <TextField {...params} placeholder="Type to search" variant="outlined" />
-                  }
-                />
-              </GridItem>
-            </div>
+          <div>
+            <GridItem xs={12} sm={12} md={6}>
+              <Autocomplete
+                onChange={this.filterData}
+                style={{ width: 200, background: "#fff", borderColor: "#fff", borderRadius: 10 }}
+                id="SearchByField"
+                options={this.state.searchBox}
+                getOptionLabel={(option) => this.state.searchByOrg ? option : (this.state.searchByName ? option : option.name)}
+                renderInput={(params) =>
+                  <TextField {...params} placeholder="Type to search" variant="outlined" />
+                }
+              />
+            </GridItem>
+          </div>
 
-            <div>
-              <GridItem xs={2} sm={2} md={2}>
-                <Button onClick={this.filterArray} color="warning" size="lg">Search</Button>
-              </GridItem>
-            </div>
-            <div>
-              <GridItem xs={2} sm={2} md={2}>
-                <a href="" onClick={this.filterArray}>Clear All Fields</a>
-              </GridItem>
-            </div>
+          <div>
+            <GridItem xs={2} sm={2} md={2}>
+              <Button onClick={this.filterArray} color="warning" size="lg">Search<SearchIcon class="text-primary" /></Button>
+            </GridItem>
+          </div>
+          <div>
+            <GridItem xs={2} sm={2} md={2}>
+              <a href="" onClick={this.filterArray}>Clear All Fields</a>
+            </GridItem>
+          </div>
 
           {/* </GridContainer> */}
         </div>

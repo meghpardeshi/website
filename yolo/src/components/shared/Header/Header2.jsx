@@ -1,6 +1,4 @@
 import React from "react";
-import {BrowserView, MobileView} from 'react-device-detect';
-
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -20,16 +18,10 @@ import styles from "../../../assets/jss/material-kit-react/components/headerStyl
 import logo from "../../../assets/img/Logo.png"
 import { store, history } from '../../../store';
 
-
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState('recents');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const [mobileOpen, setMobileOpen] = React.useState(false);
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
@@ -41,7 +33,6 @@ export default function Header(props) {
       }
     };
   });
-  
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -76,15 +67,12 @@ export default function Header(props) {
     [classes.fixed]: fixed
   });
   const brandComponent = <Button className={classes.title}>{brand}</Button>;
-
-
-
   return (
-      <AppBar className={appBarClasses}>
+    <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
         {leftLinks !== undefined ? brandComponent : null}
         <img src ={logo}
-        onClick={navigatetoHome}></img>&nbsp; &nbsp;YoloJ
+        onClick={navigatetoHome}></img>
 
         <div className={classes.flex}>
           {leftLinks !== undefined ? (
@@ -125,9 +113,6 @@ export default function Header(props) {
         </Drawer>
       </Hidden>
     </AppBar>
-      
-   
-    
   );
 }
 

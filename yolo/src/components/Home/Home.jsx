@@ -77,6 +77,7 @@ class Home extends React.Component {
         this.props.getAllProvider();
         this.props.getAllService();
         this.props.getAllBusinessType();
+        this.props.getCountriesList();
         store.subscribe(() => {
             if (store.getState().getAllApprovedProvider.error) {
                 this.setState({
@@ -91,7 +92,7 @@ class Home extends React.Component {
                     allProviderData: store.getState().getAllApprovedProvider.success,
                     allService: store.getState().getFinancialService.success,
                     allExpertise: store.getState().getBusinessTypes.success,
-                    allCountry: store.getState().getCountries.success
+                    allCountry: store.getState().getCountries.countries
                 })
             }
         })
@@ -199,6 +200,7 @@ class Home extends React.Component {
                                         getAllProvider={this.state.allProviderData}
                                         getAllService={this.state.allService}
                                         getAllExpertise={this.state.allExpertise}
+                                        getAllCountries={this.state.allCountry}
                                         filterFunction={this.filterFunction} />
                                 </div>
                             </GridItem>

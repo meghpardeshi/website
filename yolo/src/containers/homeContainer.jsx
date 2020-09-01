@@ -3,9 +3,9 @@ import Home from '../components/Home/Home';
 import { connect } from 'react-redux';
 import * as searchProviderByName from '../actions/searchByNameAction';
 import * as getApprovedProviders from '../actions/getAllProvidersActions';
-import * as getFinancialService from '../actions/getFinancialServiceAction'
-import * as getBusinessType from '../actions/getBusinessTypesAction'
-import * as getCountry from '../actions/getUtilsAction'
+import * as getFinancialService from '../actions/getFinancialServiceAction';
+import * as getBusinessType from '../actions/getBusinessTypesAction';
+import * as getCountriesReducer from '../actions/getUtilsAction';
 import { bindActionCreators } from 'redux';
 class HomeContainer extends React.Component {
     render() {
@@ -14,7 +14,7 @@ class HomeContainer extends React.Component {
             getAllProvider = {this.props.getAllProvider}
             getAllService = {this.props.getAllService}
             getAllBusinessType = {this.props.getAllBusinessType}
-            getAllCountry = {this.props.getAllCountry}
+            getCountriesList={this.props.getCountriesList}
         />
     }
 }
@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => {
         getAllProvider: getApprovedProviders.getAllProviders,
         getAllService: getFinancialService.getFinancialServiceList,
         getAllBusinessType: getBusinessType.getBusinessTypes,
-        getAllCountry: getCountry.getCountriesList
+        getCountriesList: getCountriesReducer.getCountriesList
     }, dispatch)
 } 
 

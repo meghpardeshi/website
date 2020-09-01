@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../components/shared/Header/Header2';
+import Header from '../components/shared/Header/Header';
 import HeaderLinks from '../components/shared/Header/HeaderLinks';
 import AppBar from "@material-ui/core/AppBar";
 
@@ -9,6 +9,8 @@ import * as searchProviderByName from '../actions/searchByNameAction';
 import * as getCountriesAction from '../actions/getUtilsAction';
 import * as getBusinessTypesAction from '../actions/getBusinessTypesAction';
 import * as financialServicesAction from '../actions/getFinancialServiceAction';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import MobileHeader from '../components/shared/Header/PhoneHeader';
 
 
@@ -22,8 +24,6 @@ class HeaderContainer extends React.Component {
   componentDidMount() {
     const handler = e => this.setState({matches: e.matches});
     window.matchMedia("(min-width: 768px)").addListener(handler);
-  //  console.log(localStorage.getItem('providerData').fullName)
-
   }
 
     render() {

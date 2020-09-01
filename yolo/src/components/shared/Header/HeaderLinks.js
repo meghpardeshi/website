@@ -279,7 +279,8 @@ useEffect(() => {
         }
     }
     if (localStorage.getItem('providerProfile') === 'true') {
-       setName("Hello")
+        //console.log(localStorage.getItem("providerData"))
+       //setName(localStorage.getItem("providerData"))
     }
 
 
@@ -368,8 +369,6 @@ const navigatetoLogin = () => {
           }
     
 
-    
-     
 
       <ListItem className={classes.listItem}>
       { openProfile? 

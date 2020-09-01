@@ -23,6 +23,11 @@ export function providerLogin(email, password) {
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=> {
+                    console.log(res)
+                    localStorage.setItem('providerData',JSON.stringify(res.partnerData))
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem('providerProfile', true)
+                    localStorage.setItem('providerId',res.providerId)
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })

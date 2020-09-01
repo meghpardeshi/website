@@ -48,7 +48,7 @@ const HtmlTooltip = withStyles((theme) => ({
 export default class ProviderDashboard extends React.Component {
 
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             providerData:[],
             updatedData:[]
@@ -58,58 +58,58 @@ export default class ProviderDashboard extends React.Component {
 
     componentDidMount() {
         
-     var partnerdata = window.localStorage.getItem('providerData')
-     console.log(localStorage)
-      this.setState({
-        providerData:JSON.parse(partnerdata)
-    })
-
-    fetch('/api/auth/provider/update', {
-
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            fullName:"Akanksha Kashyap", //providerData.fullName,
-            password: this.state.providerData.password,
-            email: this.state.providerData.email,
-            mobileNumber: this.state.providerData.mobileNumber,
-            Fees:this.state.providerData.Fees,
-            country: this.state.providerData.country,
-            City:this.state.providerData.City,
-            ALine1:this.state.providerData.ALine1,
-            ALine2:this.state.providerData.ALine2,
-            PinCode:this.state.providerData.PinCode,
-            OrganizationName: this.state.providerData.OrganizationName,
-            OrganizationAddress: this.state.providerData.OrganizationAddress,
-            OrganizationRegNumber: this.state.providerData.OrganizationRegNumber,
-            idType: this.state.providerData.idType,
-            busCheckedForAPI: this.state.providerData.busCheckedForAPI,
-            indCheckedForAPI:this.state.providerData.indCheckedForAPI,
-            servicesOffered: this.state.providerData.servicesOffered,
-            providerIdentityImg: this.state.providerData.providerIdentityImg,
-            partnerType: this.state.providerData.partnerType,
-            role: 4
-        })
-    }).then(res=> {
-        if(res.status === 200) {
-            console.log("Resssponse is ----",res)
-            return res.json().then(res=> {
-                this.setState({
-                    updatedData:res
-                })
-              
-    
-
-            })
-        } 
-    }).catch(err=> {
-       console.log(err);
-    })
-
-
-    }
+        var partnerdata = window.localStorage.getItem('providerData')
+        console.log(localStorage)
+         this.setState({
+           providerData:JSON.parse(partnerdata)
+       })
+   
+       fetch('/api/auth/provider/update', {
+   
+           method: 'PUT',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+               fullName:"Akanksha Kashyap", //providerData.fullName,
+               password: this.state.providerData.password,
+               email: this.state.providerData.email,
+               mobileNumber: this.state.providerData.mobileNumber,
+               Fees:this.state.providerData.Fees,
+               country: this.state.providerData.country,
+               City:this.state.providerData.City,
+               ALine1:this.state.providerData.ALine1,
+               ALine2:this.state.providerData.ALine2,
+               PinCode:this.state.providerData.PinCode,
+               OrganizationName: this.state.providerData.OrganizationName,
+               OrganizationAddress: this.state.providerData.OrganizationAddress,
+               OrganizationRegNumber: this.state.providerData.OrganizationRegNumber,
+               idType: this.state.providerData.idType,
+               busCheckedForAPI: this.state.providerData.busCheckedForAPI,
+               indCheckedForAPI:this.state.providerData.indCheckedForAPI,
+               servicesOffered: this.state.providerData.servicesOffered,
+               providerIdentityImg: this.state.providerData.providerIdentityImg,
+               partnerType: this.state.providerData.partnerType,
+               role: 4
+           })
+       }).then(res=> {
+           if(res.status === 200) {
+               console.log("Resssponse is ----",res)
+               return res.json().then(res=> {
+                   this.setState({
+                       updatedData:res
+                   })
+                 
+       
+   
+               })
+           } 
+       }).catch(err=> {
+          console.log(err);
+       })
+   
+   
+       }
 
 
 

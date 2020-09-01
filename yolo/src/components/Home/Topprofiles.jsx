@@ -7,7 +7,7 @@ import {
 import log from '../../utils/logger.service'
 import {Link} from 'react-router-dom';
 import { store } from '../../store';
-import './ProviderProfile.css';
+
 import MailIcon from '@material-ui/icons/Mail';
 import SmartphoneIcon from '@material-ui/icons/Smartphone';
 import HomeIcon from '@material-ui/icons/Home';
@@ -32,9 +32,9 @@ import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-import './SimilarCards.css';
-import Sharefunctionality from '../Home/Sharefunctionality.jsx';
-import Contact_modal from '../Home/Contact_modal.jsx';
+import '../ProviderProfile/SimilarCards.css';
+import Sharefunctionality from './Sharefunctionality.jsx';
+import Contact_modal from './Contact_modal.jsx';
 
 
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
@@ -82,7 +82,7 @@ const HtmlTooltip = withStyles((theme) => ({
 
 
 
-export default class Similar_Profiles_location extends React.Component {
+export default class Topp extends React.Component {
 
 
     constructor(props){
@@ -160,11 +160,12 @@ export default class Similar_Profiles_location extends React.Component {
                 var fullname_array=[]
 
 
+
                 return(
                     <div>
         
         
-                        <div style={{width: '90%', marginLeft: '12px'}}>Services&nbsp;<ChevronRightIcon/></div>
+                        <div style={{width: '90%', marginLeft: '12px'}}>{this.props.rcn}&nbsp;<ChevronRightIcon/></div>
                         <br/>
         
                         {
@@ -172,15 +173,16 @@ export default class Similar_Profiles_location extends React.Component {
                             (this.state.cityData && this.state.cityData.length && this.state.cityData!=undefined  ) ? this.state.cityData.map((itemz,idx)=>{
                                 return (
                                     <div>
+
+                                        {this.props.rcn}
         
-        
-                                        {this.props.rsn == itemz.servicesOffered[0].name && itemz.fullName!=this.state.providerData.fullName?
+                                        {itemz.City==this.props.rcn ?
                                         (
                                         <div>    
         
                     
                                             <span style={{display: 'none'}}>
-                                                {!fullname_array.includes(itemz.fullName)?
+                                                {!fullname_array.includes(itemz.fullName) ?
                                                 (
                                                     fullname_array.push(itemz.fullName)
                                                 )
